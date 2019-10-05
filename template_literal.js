@@ -1,5 +1,5 @@
 const name = 'John';
-const age = 30;
+const age = 33;
 const job = 'Web Developer';
 const city = 'Sydney';
 
@@ -20,15 +20,27 @@ html = '<ul>' +
 
 // With Template Strings
 
+function hello(){
+    return 'Hello';
+}
+
 html = `
     <ul>
         <li>Name: ${name} </li>
         <li>Age: ${age} </li>
         <li>Job: ${job} </li>
-        <li>City ${city} </li>
-
+        <li>City: ${city} </li>
+        <li>Country: Australia </li>
+        <li>${2 + 2} </li>
+        <li>${hello()}</li>
+        <li>${age > 30 ? 'Over 30' : 'Under 30'}</li>
     </ul>
 `;
+
+// ${} is template literals.
+// More definition in MDN web docs in Mozilla: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals
+// Template literals are string literally that allow expressions.
+// To use Template Literals, you need to enclose the string via a back tick
 
 
 document.body.innerHTML = html;
