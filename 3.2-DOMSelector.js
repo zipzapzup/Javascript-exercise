@@ -2,7 +2,7 @@
 // 1. Single Elements = document.getElementbyID()
 // 2. Multiple Elements
 
-
+// 1. Single Element Selector:
 // Obtain Entire HTML Element from the ID
 console.log(document.getElementById('task-title'));
 // >>  <h5 id="task-title">Tasks</h5>
