@@ -152,7 +152,7 @@ function removeTask(e){
         if( confirm('Are you Sure you want to Delete?')){
             e.target.parentElement.parentElement.remove();
 
-            // Remove from LS
+            // Remove from Local Storage
             removeTaskFromLocalStorage(e.target.parentElement.parentElement);
         }  
     }
@@ -177,7 +177,7 @@ function removeTaskFromLocalStorage(taskItem){
 }
 
 
-
+// Clear tasks to clear
 function clearTask(){
     while(taskList.firstChild){
         taskList.removeChild(taskList.firstChild);
@@ -186,6 +186,7 @@ function clearTask(){
     clearTasksFromLocalStorage();
 }
 
+// Clear Tasks to clear from local storage
 function clearTasksFromLocalStorage(){
     localStorage.clear();
 }
