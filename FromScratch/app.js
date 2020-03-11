@@ -30,6 +30,9 @@ loadEventListeners();
 
 // Load all event listeners
 function loadEventListeners() {
+    document.addEventListener('DOMContentLoaded', getTasks);
+
+
     // Add task event. An event listener to listen to the submit event and execute addTask
     form.addEventListener('submit', addTask );
     // List of all DOM Event, AKA: Event Listener is in: 
@@ -44,6 +47,38 @@ function loadEventListeners() {
     // Add a filter event, when we filter up using the key up.
     filter.addEventListener('keyup', filterTasks);
 
+}
+
+
+function getTasks(){
+    let tasks;
+    if(localStorage.getItem('tasks' === null)) {
+        tasks = [];
+    } else {
+        tasks = JSON.parse(localStorage.getItem('tasks'));
+    }
+
+    tasks.forEach(function(task){
+        // Create li element
+        const li = document.createElement('li');
+        // Add class
+        li.className = 'collection-item';
+        // Create text node and append to li
+        li.appendChild(document.createTextNode(task));
+    
+        // Part2
+        // Create new link element
+        const link = document.createElement('a');
+        // Add class 
+        // Note: secondary content and delete item is the x button on materialise CSS, secondary content will place it to the right.
+        link.className = 'delete-item secondary-content';
+        // Add icon html through the i class
+        // Note: fa fa-remove is the x mark icon
+        link.innerHTML = '<i class="fa fa-remove"></i>';
+        // Append the link to li
+        li.appendChild(link);
+        taskList.appendChild(li);
+    })
 }
 
 // Add task button, all of the function
@@ -87,6 +122,11 @@ function addTask(e) {
     //Append li to ul
     taskList.appendChild(li);
 
+    //Part4
+    // Store to Local Storatge
+    storeTaskinLocalStorage(taskInput.value);
+
+
     // Clear input
     taskInput.value = '';
     console.log(li);
@@ -95,13 +135,45 @@ function addTask(e) {
     e.preventDefault();
 }
 
+// Function below will store the text input to Local Storage. 
+function storeTaskinLocalStorage(task) {
+    let tasks;
+    if( localStorage.getItem('tasks') === null ){
+        tasks = [];
+    } else {
+        tasks = JSON.parse(localStorage.getItem('tasks'));
+    }
+    tasks.push(task);
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+}
+
 function removeTask(e){
     if ( e.target.parentElement.classList.contains('delete-item') ){
         if( confirm('Are you Sure you want to Delete?')){
             e.target.parentElement.parentElement.remove();
+
+            // Remove from LS
+            removeTaskFromLocalStorage(e.target.parentElement.parentElement);
         }  
     }
 
+}
+
+function removeTaskFromLocalStorage(taskItem){
+    let tasks;
+    if(localStorage.getItem('tasks' === null)){
+        tasks = [];
+    } else {
+        tasks = JSON.parse(localStorage.getItem('tasks'));
+    }
+
+    tasks.forEach(function(task, index){
+        if(taskItem.textContent === task){
+            tasks.splice(index, 1);
+        }
+    });
+
+    localStorage.setItem('tasks', JSON.stringify(tasks));
 }
 
 
@@ -109,7 +181,13 @@ function removeTask(e){
 function clearTask(){
     while(taskList.firstChild){
         taskList.removeChild(taskList.firstChild);
+    }
+
+    clearTasksFromLocalStorage();
 }
+
+function clearTasksFromLocalStorage(){
+    localStorage.clear();
 }
 
 function filterTasks(e){
