@@ -1,8 +1,11 @@
 // Create the UI Apps
-
+// Note In Javascript, look for what the query Selector is selecting.
+// It can select a particular
+// 1. # = ID
+// 2. . = class
 // Define UI Variable
 const form = document.querySelector('#task-form');
-// Task form is the Task Kelvin List form at the top
+// Task form is the Task Kelvin List form at the top. Its an ID #
 // Above variable will grab the task Kelvin List
 
 const taskList = document.querySelector('.collection');
@@ -17,7 +20,8 @@ const filter = document.querySelector('#filter');
 
 const taskInput = document.querySelector('#task');
 // Task input is underneath the task kelvin list.
-// Inputting the task.
+// ID Task is the input element in the HTML
+// It is used to take the text input into Variable: "const taskInput"
 
 
 // Load all event listeners
@@ -28,6 +32,8 @@ loadEventListeners();
 function loadEventListeners() {
     // Add task event. An event listener to listen to the submit event and execute addTask
     form.addEventListener('submit', addTask );
+    // List of all DOM Event, AKA: Event Listener is in: 
+    // https://www.w3schools.com/jsref/dom_obj_event.asp
 }
 
 // Add task button, all of the function
