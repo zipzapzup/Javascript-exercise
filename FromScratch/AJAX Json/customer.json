@@ -1,5 +1,7 @@
 {
     "id": 1,
-    "name": "John Doe"
+    "name": "John Doe",
+    "company": "132 Extensive Co",
+    "phone": "456-555-1512"
 
 }
