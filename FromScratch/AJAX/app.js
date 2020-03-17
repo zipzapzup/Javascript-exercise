@@ -9,6 +9,20 @@ function loadData(){
 
     // OPEN
     xhr.open('GET','data.txt',true);
+    //     console.log('READYSTATE', xhr.readyState)
+
+    // Optional - used for spinners / loaders
+    xhr.onprogress = function (){
+        console.log('READYSTATE', xhr.readyState);
+        // READY STATE 3 - because its on progress
+        document.querySelector('#output').innerHTML = `
+        <h1>${this.responseText}</h1>`
+
+
+    }
+
+    // on load is always when READYSTATE is at 4: request finished and response is ready.
+
     xhr.onload = function(){
         if(this.status === 200){
             console.log(this.responseText);
@@ -16,13 +30,21 @@ function loadData(){
         }
 
     }
-    xhr.onreadystatechange = function () {
-        if(this.status === 200 && this.readyState === 4){
-            console.log(this.responseText);
 
-        }
+    // xhr.onreadystatechange = function () {
+    //     console.log('READYSTATE', xhr.readyState);
+
+    //     if(this.status === 200 && this.readyState === 4){
+    //         console.log(this.responseText);
+
+    //     }
+
+    // }
+    xhr.onerror = function() {
+        console.log('Request error...');
 
     }
+
     xhr.send();
 
 
