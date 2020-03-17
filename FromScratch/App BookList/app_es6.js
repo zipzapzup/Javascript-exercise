@@ -1,3 +1,4 @@
+// Initiate the book class 
 class Book {
     constructor(title, author, isbn) {
         this.title = title;
@@ -9,7 +10,7 @@ class Book {
 
 }
 
-
+// Initiate the UI class 
 class UI {
 
     addBookToList(book) {
