@@ -40,10 +40,8 @@ class EasyHTTP {
                 },
                 body: JSON.stringify(data)
             });
-
         const resData = await response.json();
         return resData;
-
         }
     
     // Make HTTP Delete Request
@@ -58,6 +56,4 @@ class EasyHTTP {
         const resData = await 'Resource deleted';
         return resData;
         }
-    
-
 }
