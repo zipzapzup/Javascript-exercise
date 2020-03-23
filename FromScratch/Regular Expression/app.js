@@ -52,7 +52,7 @@ re = /gra?e?y\?/i;   // \ Escape character
 
 // Brackets [] - Character Sets
 re = /gr[ae]y/i;        // Must be an a or e
-re = /[GF]]ray/i;       // Must be a G or F    
+re = /[GF]ray/i;       // Must be a G or F    
 re = /[^GF]]ray/i;      // Match anything EXCEPT a G or F, if ^ if isnide []
 re = /[A-Z]]ray/i;      // Match any uppercase letter
 re = /[a-z]]ray/i;      // Match any uppercase letter
