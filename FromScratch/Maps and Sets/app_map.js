@@ -10,7 +10,6 @@ const key1 = 'some string',
 
 
 // Set map Values by key
-
 map1.set(key1, 'Value of key1');
 map1.set(key2, 'Value of key2');
 map1.set(key3, 'Value of key3');
@@ -50,10 +49,8 @@ map1.forEach(function(value,key ){
 
 // Convert to Array using Maps
 // Create Array with key-value pair
-
 const keyValArr = Array.from(map1);
 console.log(keyValArr);
-
 
 // Create Array of the values
 const valArr = Array.from(map1.values());
@@ -62,8 +59,6 @@ console.log(valArr);
 // Create Array of the keys
 const keyArr = Array.from(map1.keys());
 console.log(keyArr);
-
-
 
 
 
