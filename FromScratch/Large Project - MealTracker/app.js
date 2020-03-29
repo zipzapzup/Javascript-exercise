@@ -72,6 +72,23 @@ const ItemCtrl = (function() {
             });
             return found;
         },
+        deleteItem: function(id){
+            // Get ids
+            ids = data.items.map(function(item){
+                return item.id;
+            });
+
+            // Get index
+            const index = ids.indexOf(id);
+
+            // Remove item 
+            data.items.splice(index, 1);
+
+
+        },
+        clearAllItems: function(){
+            data.items = [];
+        },
         setCurrentItem: function(item){
             data.currentItem = item;
         },
@@ -115,7 +132,8 @@ const UICtrl = (function() {
         backBtn: ".back-btn",
         itemNameInput: '#item-name',
         itemCaloriesInput: '#item-calories',
-        totalCalories: '.total-calories'
+        totalCalories: '.total-calories',
+        clearBtn: '.clear-btn'
     }
 
     // Public Method
@@ -175,6 +193,11 @@ const UICtrl = (function() {
             });
 
         },
+        deleteListItem: function(id){
+            const itemID = `#item-${id}`;
+            const item = document.querySelector(itemID);
+            item.remove();
+        },
         clearInput: function(){
             document.querySelector(UISelectors.itemNameInput).value = '';
             document.querySelector(UISelectors.itemCaloriesInput).value = '';
@@ -198,6 +221,15 @@ const UICtrl = (function() {
             document.querySelector(UISelectors.deleteBtn).style.display = 'inline';
             document.querySelector(UISelectors.backBtn).style.display = 'inline';
             document.querySelector(UISelectors.addBtn).style.display = 'none';
+        },
+        removeItems: function(){
+            let listItems = document.querySelectorAll(UISelectors.listItems);
+
+            // Turn Node list into array
+            listItems = Array.from(listItems);
+            listItems.forEach(function(item){
+                item.remove();
+            });
         },
         hideList: function(){
             document.querySelector(UISelectors.itemList).style.display = 'none';
@@ -240,10 +272,18 @@ const App = (function(ItemCtrl, UICtrl) {
         // Edit Icon Click Event Listener
         document.querySelector(UISelectors.itemList).addEventListener('click', itemEditClick);
 
-
-
         // Update item event
         document.querySelector(UISelectors.updateBtn).addEventListener('click', itemUpdateSubmit);
+
+        // Back button event
+        document.querySelector(UISelectors.backBtn).addEventListener('click', UICtrl.clearEditState);
+
+        // Delete item event
+        document.querySelector(UISelectors.deleteBtn).addEventListener('click', itemDeleteSubmit);
+
+        // Clear All event
+        document.querySelector(UISelectors.clearBtn).addEventListener('click', clearAllItemsClick);
+
     }
 
     // Add item submit
@@ -316,6 +356,47 @@ const App = (function(ItemCtrl, UICtrl) {
         UICtrl.clearEditState();
         e.preventDefault();
     }
+
+    // Delete button event
+    const itemDeleteSubmit = function(e){
+        // Get current item
+        console.log(123);
+        const currentItem = ItemCtrl.getCurrentItem();
+
+        // Delete from data structure
+        ItemCtrl.deleteItem(currentItem.id);
+
+        // Delete from UI
+        UICtrl.deleteListItem(currentItem.id);
+
+        // Get total calories
+        const totalCalories = ItemCtrl.getTotalCalories();
+        // Add total calories to UI
+        UICtrl.showTotalCalories(totalCalories);
+                
+        UICtrl.clearEditState();
+
+        e.preventDefault();
+    }
+
+    // Clear Item event
+    const clearAllItemsClick = function() {
+        // Delete all items from data structure
+        ItemCtrl.clearAllItems();
+
+        // Get total calories
+        const totalCalories = ItemCtrl.getTotalCalories();
+        // Add total calories to UI
+        UICtrl.showTotalCalories(totalCalories);
+
+        // Remove from UI
+        UICtrl.removeItems();
+       
+        // Hide UL
+        UICtrl.hideList();
+
+    }
+
 
     // Public methods
     return {
