@@ -4,7 +4,7 @@ class UI {
         this.titleInput = document.querySelector('#title');
         this.bodyInput = document.querySelector('#body');
         this.idInput = document.querySelector('#id');
-        this.postSubmit = document.querySelector('#post-submit');
+        this.postSubmit = document.querySelector('.post-submit');
         this.forState = 'add';
     }
 
@@ -53,7 +53,7 @@ class UI {
         }, 5000);
 
     }
-
+    // Clear alerts
     clearAlert() {
         const currentAlert = document.querySelector('.alert');
         
@@ -61,10 +61,56 @@ class UI {
             currentAlert.remove();
         }
     }
-
+    // Clear all fields
     clearFields() {
         this.bodyInput.value = '';
         this.titleInput.value = '';
+    }
+
+    // Fill form to edit
+    fillForm(data) {
+        this.titleInput.value = data.title;
+        this.bodyInput.value = data.body;
+        this.idInput.value = data.id;
+
+        this.changeFormState('edit');
+    }
+
+    clearIdInput() {
+        this.idInput.value = '';
+    }
+
+    changeFormState(type) {
+        if(type === 'edit') {
+            this.postSubmit.textContent = 'Update Post';
+            this.postSubmit.className = 'post-submit btn btn-warning btn-block';
+
+            // Create cancel button
+            const button = document.createElement('button');
+            button.className = 'post-cancel btn btn0light btn-block';
+            button.appendChild(document.createTextNode('Cancel Edit'));
+
+            // Get parent
+            const cardForm = document.querySelector('.card-form');
+            // Get element to insert before
+            const formEnd = document.querySelector('.form-end');
+            // Insert cancel button
+            cardForm.insertBefore(button, formEnd);
+
+        } else {
+            this.postSubmit.textContent = 'Post it';
+            this.postSubmit.className = 'post-submit btn btn-primary btn-block';
+            // Remove cancel btn if it is there
+
+            if(document.querySelector('.post-cancel')) {
+                document.querySelector('.post-cancel').remove();
+            }
+            // Clear ID from hidden field
+            this.clearIdInput();
+            // Clear text
+            this.clearFields();
+        }
+
     }
 }
 
