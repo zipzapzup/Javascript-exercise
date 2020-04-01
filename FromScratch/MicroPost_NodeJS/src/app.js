@@ -21,8 +21,8 @@ function submitPost() {
   const body = document.querySelector('#body').value;
 
   const data = {
-    title,
-    body
+    title: title,
+    body: body
   }
 
   // Create POST method
