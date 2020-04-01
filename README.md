@@ -4,3 +4,7 @@ Repository for java script exercise. Extension Setup:
 - YAML
 - JavaScript ES6
 - Bracket Pair Colorizer
+
+2 Folders:
+- BasicJavaScript: refers to the Basic JavaScript
+- FromScratch: Projects relating to Javascript
