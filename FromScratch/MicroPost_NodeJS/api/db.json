@@ -2,7 +2,7 @@
   "posts": [
     {
       "title": "Post One",
-      "body": "This is post one updating one",
+      "body": "This is post one updating to a better wording. Lets see how this put method will edit the form.",
       "id": 1
     },
     {
@@ -19,6 +19,11 @@
       "title": "Posts Four",
       "body": "Ola ola ola",
       "id": 4
+    },
+    {
+      "title": "Post five",
+      "body": "Just a post five",
+      "id": 5
     }
   ]
 }
